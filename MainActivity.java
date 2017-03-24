@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 1; i <= Qtte; i++) {
                         Log.d("test", "try");
                         SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage(phoneNo, null, sms, null, null);
+                        smsManager.sendTextMessage(phoneNo, null, sms + "// SMS " + i +" have Fun" , null, null);
                         Toast.makeText(getApplicationContext(), i+"/" + Qtte + "envoyés !",
                                 Toast.LENGTH_LONG).show();
-                        Thread.sleep(1000);
+                        Thread.sleep(2*1000);
                     }
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(),
