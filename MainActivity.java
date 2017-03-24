@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         textPhoneNo = (EditText) findViewById(R.id.editTextNum);
         textSMS = (EditText) findViewById(R.id.editTextMsg);
         textQtte = (EditText) findViewById(R.id.editTextQtte);
+        final String spamMsg = "Spam SMS réalisé avec SpamBot Pour Android";
 
         //definir le filtre des quantités
         textQtte.setFilters(new InputFilter[]{new InputFilterMinMax("1", "100")}); //Definit la limite
@@ -40,9 +41,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String phoneNo = textPhoneNo.getText().toString();
+
+                //Controle de la présence d'un corps de msg
+                if (textSMS.getText().toString().trim().isEmpty()) {
+                    textSMS.setText(spamMsg);
+                }
+                //Recuperation de la variable sms
                 String sms = textSMS.getText().toString();
-                if (textQtte.getText().toString().trim().isEmpty()){
+                //Controle de la qtte de SMS
+                if (textQtte.getText().toString().trim().isEmpty()) {
                     textQtte.setText("1");
+                    Toast.makeText(getApplicationContext(), "Pas de quantitée annoncée, envoi de 1 sms",
+                            Toast.LENGTH_LONG).show();
                 }
                 int Qtte = Integer.parseInt(textQtte.getText().toString());
 
@@ -52,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 1; i <= Qtte; i++) {
                         Log.d("test", "try");
                         SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage(phoneNo, null, sms + "// SMS " + i + " have Fun", null, null);
+                        smsManager.sendTextMessage(phoneNo, null, sms + "                    " + i + "/" + Qtte, null, null);
                         Toast.makeText(getApplicationContext(), i + " /" + Qtte + "envoyés !",
                                 Toast.LENGTH_LONG).show();
                         Thread.sleep(2000);
                     }
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(),
-                            "Verifier les autorisations SMS dans les paramètres de l'application",
+                            "Assurez vous d'avoir entré un numero, ou verifiez les autorisations SMS dans les paramètres de l'application",
                             Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
