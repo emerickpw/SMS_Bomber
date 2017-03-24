@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
                 int Qtte = Integer.parseInt(textQtte.getText().toString());
                 if (textQtte.toString().trim().length() < 1){
                     Qtte = 1;
-                    Toast.makeText(getApplicationContext(), "Pas de quantité donnée, 1 SMS envoyé",
-                            Toast.LENGTH_LONG).show();
+                    /*Toast.makeText(getApplicationContext(), "Pas de quantité donnée, 1 SMS envoyé",
+                            Toast.LENGTH_LONG).show();*/
                 }
 
 
